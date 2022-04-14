@@ -1,15 +1,32 @@
-secretWord= "Me"
-wordguessed= ""
+word = "laugh"
 
-scoreCount= 6
+allowedAttempts =7
+guesses =[]
+done = False
 
-while scoreCount > 0 :
-  userGuess= input("Enter a word: ")
+while not done:
+  for letter in word:
+    if letter.lower() in guesses:
+      print(letter, end=" ")
+    else:
+      print("_", end= " ")
+  print("") 
 
-if userGuess in secretWord:
-    print("correct")
-else:
-    scoreCount -=1
-    print(f"Incorrect. You have {scoreCount} chances remaining")       
+  
+  guess= input(f"Allowed number of trials left {allowedAttempts}, next guess: ") 
+  guesses.append(guess.lower())
+  if guess.lower() not in word.lower():
+    allowedAttempts -=1
+    if allowedAttempts == 0:
+      break
     
-wordguessed= wordguessed + userGuess    
+  done = True
+  for letter in word:
+    if letter.lower() not in guesses:
+      done =False
+    
+if done:
+  print(f"You've found the word. It was {word}")
+else:      
+   print("")   
+      
